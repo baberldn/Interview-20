@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-// Para birimi kodlarını içeren sabit liste
+
 const CURRENCY_NAME_TO_CODE = {
   "United States Dollar": "USD",
   "Euro": "EUR",
   "British Pound Sterling": "GBP",
   "Turkish Lira": "TRY",
-  // Diğer para birimlerini buraya ekleyebilirsiniz
+  
 };
 
 const CurrencyConverter = () => {
@@ -17,23 +17,23 @@ const CurrencyConverter = () => {
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [error, setError] = useState("");
 
-  // Döviz kuru verisini almak için API çağrısı yapıyoruz
+  
   const convertCurrency = async () => {
     if (!amount || isNaN(amount) || amount <= 0) {
       setError("Lütfen geçerli bir tutar girin.");
       return;
     }
 
-    setError(""); // Hata mesajını temizle
+    setError(""); 
 
     try {
-      // API'ye istek atıyoruz
+      
       const response = await axios.get(
         `https://api.exchangerate.host/latest?base=${fromCurrency}`
       );
       const rates = response.data.rates;
 
-      // Hedef para birimine dönüştürme
+    
       const rate = rates[toCurrency];
       if (rate) {
         const result = (amount * rate).toFixed(2);
